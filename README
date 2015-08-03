@@ -43,7 +43,7 @@ gubseric/
     test_gubserfo.sh -- tests entropy flow through freezout surface in ideal gubser flow
 test_code2d/
     test_code2d.sh -- compares full 2D evolution of bumpy initial conditions and compares with results from old code
-    test_code3d.sh -- runs bumpy initial conditions with smooth perturbations inn rapidity direction (currently works with Euler_IMEX)
+    test_code3d.sh -- runs bumpy initial conditions with smooth perturbations in rapidity direction
 
 5) remaining folders contain
 hydro/ -- main hydro code

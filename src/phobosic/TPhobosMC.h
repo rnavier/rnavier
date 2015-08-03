@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2015, Aleksas Mazeliauskas and Derek Teaney
+ * All rights reserved.
+ *
+ * rnavier is distributed under MIT license;
+ * see the LICENSE file that should be present in the root
+ * of the source distribution, or alternately available at:
+ * https://github.com/rnavier/rnavier/
+ */
 //This code is based on TGlauberMC_v1.1
 //Original code can be found at
 //http://www.hepforge.org/downloads/tglaubermc

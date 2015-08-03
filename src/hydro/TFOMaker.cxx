@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2015, Aleksas Mazeliauskas and Derek Teaney
+ * All rights reserved.
+ *
+ * rnavier is distributed under MIT license;
+ * see the LICENSE file that should be present in the root
+ * of the source distribution, or alternately available at:
+ * https://github.com/rnavier/rnavier/
+ */
 #include "TFOMaker.h"
 #include "TLimiter.h"
 #include "TRNavier3DBj.h"

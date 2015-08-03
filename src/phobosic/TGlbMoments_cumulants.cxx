@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2015, Aleksas Mazeliauskas and Derek Teaney
+ * All rights reserved.
+ *
+ * rnavier is distributed under MIT license;
+ * see the LICENSE file that should be present in the root
+ * of the source distribution, or alternately available at:
+ * https://github.com/rnavier/rnavier/
+ */
 {
 complex<double>  Compile_$1, Compile_$4, Compile_$3, Compile_$6, Compile_$9,
 Compile_$12, Compile_$7, Compile_$16, Compile_$19,

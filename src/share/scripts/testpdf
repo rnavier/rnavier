@@ -1,0 +1,21 @@
+#!/bin/bash
+gnuplot $1.gpi
+latex $1.tex
+dvips -o $1.ps $1.dvi
+ps2eps -f --loose $1.ps
+epstopdf $1.eps
+rm $1.tex
+rm $1.log
+rm $1.aux
+rm $1-inc.eps
+rm $1.eps
+rm $1.ps
+rm $1.dvi
+
+httform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+    evince $1.pdf
+elif [[ "$unamestr" == 'Darwin' ]]; then
+    open $1.pdf
+fi

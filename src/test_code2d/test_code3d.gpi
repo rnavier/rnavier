@@ -1,0 +1,46 @@
+#set terminal postscript eps enhanced  color  lw 0.5 dl 1.2 size 8.0,8.0 "Helvetica"  22 
+#set output "work.eps"
+#set termoption dashed
+set terminal wxt size 824,1600
+set palette defined ( 0 "#000090",\
+                      1 "#000fff",\
+                      2 "#0090ff",\
+                      3 "#0fffee",\
+                      4 "#90ff70",\
+                      5 "#ffee00",\
+                      6 "#ff7000",\
+                      7 "#ee0000",\
+                      8 "#7f0000")
+set output "3d.png"
+set multiplot layout 4,2
+set nokey
+set view map
+set size square
+tag = "code3d"
+set style line 1 lw 2 ps 2 lt 1 lc rgb "red"
+set style line 2  lw 2 ps 2 lt 2 lc rgb "dark-spring-green"
+
+set xlabel "x"
+set ylabel "y"
+set title "z=0"
+splot [-6:6][-6:6] tag."_2dslice_xy_0000.out" u 2:3:5 index 0 w pm3d
+splot [-6:6][-6:6] tag."_2dslice_xy_0000.out" u 2:3:5 index 5 w pm3d
+set xlabel "x"
+set ylabel "eta"
+set title "y=0"
+splot [-6:6][-3:3] tag."_2dslice_xz_0000.out" u 2:4:5 index 0 w pm3d
+splot [-6:6][-3:3] tag."_2dslice_xz_0000.out" u 2:4:5 index 5 w pm3d
+set xlabel "y"
+set ylabel "eta"
+set title "x=0"
+splot [-6:6][-3:3] tag."_2dslice_yz_0000.out" u 3:4:5 index 0 w pm3d
+splot [-6:6][-3:3] tag."_2dslice_yz_0000.out" u 3:4:5 index 5 w pm3d
+set xlabel "eta"
+set ylabel "energy x time"
+set title "energy profile"
+plot \
+tag."_1dslice_z_0000_0000.out" u 4:($5*$1):1 w l ls 1 lc palette
+
+
+unset multiplot
+

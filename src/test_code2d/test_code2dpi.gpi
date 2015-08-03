@@ -1,0 +1,28 @@
+#set terminal postscript eps enhanced  color  lw 0.5 dl 1.2 size 8.0,8.0 "Helvetica"  22 
+#set output "work.eps"
+#set termoption dashed
+set terminal wxt size 1200,1200
+set termoption dashed
+#set output "pi.png"
+set multiplot title "2d vs 3d t_o=0.6 fm" layout 3,3
+set view map
+set size square
+tag = "code2d"
+tag2 = "code2d/code2d"
+set style line 1 lw 2 ps 2 lt 1 lc rgb "red"
+set style line 2  lw 2 ps 2 lt 2 lc rgb "dark-spring-green"
+set style line 3  lw 2 ps 2 lt 3 lc rgb "dark-orange"
+unset logscale y
+set xlabel "y"
+set ylabel "-pi^zz"
+f(i) = 2*i + 2
+stime(i) = sprintf("t=%4.1f fm",0.6 + 0.6*f(i))
+do for [i=0:8] {
+   set label stime(i) at graph 0.1, 0.9 
+   plot [-12:12] \
+   tag."_2dslice_xy_0000.out" every :::101::101 using  3:(-$20) index f(i) t "new" w l ls 1, \
+   tag2."_xvsy.out" every :::99::99 using 3:(-$18) index f(i) t "old" w l ls 2
+   unset label
+}
+unset multiplot
+

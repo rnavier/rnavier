@@ -1,0 +1,13 @@
+set terminal wxt  size 1600,1600
+set view equal xyz
+unset key
+set xrange [-5:5]
+set yrange [-5:5]
+set zrange [-5:5]
+set xlabel "tau"
+set ylabel "x"
+set ylabel "y"
+set title "Freezout surface"
+splot\
+"gubserfo.out" every 5 u 1:2:3:6:7:8 w p ps 2,\
+

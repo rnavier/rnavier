@@ -1,0 +1,23 @@
+{
+double tr;
+tr=pi[0]*sg[0]-2*pi[1]*sg[1]-2*pi[2]*sg[2]-2*pi[3]*sg[3]+pi[4]*sg[4]+2*pi[5]\
+*sg[5]+2*pi[6]*sg[6]+pi[7]*sg[7]+2*pi[8]*sg[8]+pi[9]*sg[9];
+pisigma[0]=-(tr*(1+pow(u[1],2)))/3.-pi[1]*sg[1]+pi[4]*sg[4]+pi[5]*sg[5]+pi[6\
+]*sg[6];
+pisigma[1]=(-3*pi[2]*sg[1]-3*pi[1]*sg[2]+3*pi[5]*sg[4]+3*pi[4]*sg[5]+3*pi[7]\
+*sg[5]+3*pi[8]*sg[6]+3*pi[5]*sg[7]+3*pi[6]*sg[8]-2*tr*u[1]*u[2])/6.;
+pisigma[2]=(-3*pi[3]*sg[1]-3*pi[1]*sg[3]+3*pi[6]*sg[4]+3*pi[8]*sg[5]+3*pi[4]\
+*sg[6]+3*pi[9]*sg[6]+3*pi[5]*sg[8]+3*pi[6]*sg[9]-2*tr*u[1]*u[3])/6.;
+pisigma[3]=-(tr*(1+pow(u[2],2)))/3.-pi[2]*sg[2]+pi[5]*sg[5]+pi[7]*sg[7]+pi[8\
+]*sg[8];
+pisigma[4]=(-3*pi[3]*sg[2]-3*pi[2]*sg[3]+3*pi[6]*sg[5]+3*pi[5]*sg[6]+3*pi[8]\
+*sg[7]+3*pi[7]*sg[8]+3*pi[9]*sg[8]+3*pi[8]*sg[9]-2*tr*u[2]*u[3])/6.;
+piomega[0]=om[0]*pi[1]+om[3]*pi[5]+om[4]*pi[6];
+piomega[1]=(om[1]*pi[1]+om[0]*pi[2]-om[3]*pi[4]+om[5]*pi[6]+om[3]*pi[7]+om[4\
+]*pi[8])/2.;
+piomega[2]=(om[2]*pi[1]+om[0]*pi[3]-om[4]*pi[4]-om[5]*pi[5]+om[3]*pi[8]+om[4\
+]*pi[9])/2.;
+piomega[3]=om[1]*pi[2]-om[3]*pi[5]+om[5]*pi[8];
+piomega[4]=(om[2]*pi[2]+om[1]*pi[3]-om[4]*pi[5]-om[3]*pi[6]-om[5]*pi[7]+om[5\
+]*pi[9])/2.;
+}

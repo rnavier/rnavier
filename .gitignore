@@ -1,0 +1,44 @@
+# Ignore cmake generated files
+Makefile
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+#
+gts/*
+*.state
+*.ini
+# Temporaries
+*.o
+*~
+
+# root dictionaries
+*_dict.cxx
+*_dict.h
+
+# Fortran modules
+*.mod
+
+# Ignore output files
+*.root
+*.aqua
+*.swp
+*.swo
+*.swn
+*.exe
+*.out
+*.ref
+*.svg
+*.html
+*.css
+*.start
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.a
+*.dylib
+*.so
+

@@ -1,0 +1,141 @@
+
+# 
+#
+# Set up the equation of state parameters parameters
+#
+[TGammaLaw]
+fGammaIndex          = 1.3             ; Adiabatic  Index
+fEtaOverS            = 0.16            ; shear viscosity /s
+fSigmaOverS          = 0.00001         ; bulk  viscosity /s
+fKappaTOverS         = 0.00001         ; conductivity / s
+fT0                  = 1.000           ; T0  The temperature at energy density E0
+fE0                  = 5.0000          ; E0 The reference energy density
+fTPi_EtaST           = 2.61            ; tau_pi/(eta/sT)
+fL1_EtaTPi           = 0.766           ; lambda_1/(eta*tau_pi)
+fL2_EtaTPi           = -1.06           ; lambda_2/(eta*tau_pi)
+
+#
+# Set up the  parameters for TEOSLat
+#
+[TEOSLat]
+fEtaOverS            = 0.08000         ; shear viscosity /s
+fSigmaOverS          = 0.00001         ; bulk viscosity /s
+fKappaTOverS         = 0.00001         ; conductivity / s
+fTPi_EtaST           = 2.61            ; tau_pi/(eta/sT)
+fL1_EtaTPi           = 0.766           ; lambda_1/(eta*tau_pi)
+fL2_EtaTPi           = -1.06           ; lambda_2/(eta*tau_pi)
+
+# parameters for TEOSs95p
+[TEOSs95p]
+fEtaOverS            = 0.08            ; shear viscosity /s
+fSigmaOverS          = 0.00001         ; bulk viscosity /s
+fKappaTOverS         = 0.00001         ; conductivity / s
+fTPi_EtaST           = 2.61            ; tau_pi/(eta/sT)
+fL1_EtaTPi           = 0.766           ; lambda_1/(eta*tau_pi)
+fL2_EtaTPi           = -1.06           ; lambda_2/(eta*tau_pi)
+
+# Standard Bjorken Regulator of Initial State. pimunu is regulated
+# as follows:
+#
+# pi = pi_navier_stokes /(1. + C1*pimunu*pimunu/pressure**2)
+#
+# In addition a minimum energy density of fEpsilon0 is added to the 
+# whatever the input initial energy density  is.
+[TBjRegulator]
+fCutoffC1            = 0.5             ; 
+fEpsilon0            = 1.e-4           ; 
+
+
+#
+# Input parameters for stepper (put boundary conditions here?)
+#
+[TBRSSSStep]
+fStepType            = ARS222          ; The name of stepping algorithm
+fCFL                 = 0.1             ; THE CFL number
+fIsIdealFluid        = False           ; Take an ideal step
+fAccelerationFlag    = 1               ; 0/1, The acceleration is computed using ideal hydro estimate/viscous hydro estimate the explicit step
+fPropagationFlag     = 1               ; 0/1, The signal velocities are taken with the ideal charachteristics/speed of light
+
+
+# Cartesian or Bjorken Coordinates
+[TBRSSS]
+fIsCartesian         = False           ; Toggles between cartesian and bjorken coordinates
+
+
+#
+# The domain specifying the grid
+#
+[TDomain3D]
+fNx                  = 200             ; The number of grid points
+# We want the same grid spacing as the 2d code but want a grid point
+# exactly at x=0
+fXmin                = -14.92500       ; The smallest value of x
+xmax                 = 15.075000       ; The largest value of x for an even slice
+
+fNy                  = 200             ; The number of grid points
+# We want the same grid spacing as the 2d code but want a grid point
+# exactly at y=0
+fYmin                = -14.92500       ; The smallest value of x
+ymax                 = 15.07500        ; The largest value of x for an even slice
+
+fNz                  = 1               ; The number of grid points
+fZmin                = -1.00000        ; The smallest value of x
+zmax                 = 1.00000         ; The largest value of x for an even slice
+
+# The 2d code starts at this time at takes a time step of 0.1*dt
+# to align with the staggered grid. By taking 0.597 the actual 
+# time of first printing is 0.6
+fTime                = 0.597           ; The starting time
+
+[TGrid3D]
+fBCName              = periodicz       ; fill up boundary conditions
+
+# Test case solves bjorken in 1+1
+[TICBjTest]
+fTau0                = 1.0             ; Initial time
+fS0                  = 34.             ; Initial entropy  per area per rapidity, s =S0/tau0
+fNOverS              = 0.01            ; constant speed of sound in solution
+fPiOverPiNS          = 1.              ; The ratio of pizz to to the navier stokes expectation
+fSigmaxInverse       = 0.25            ; The width of the gaussian which is initialized in x
+fSigmayInverse       = 0.25            ; The width of the gaussian which is initialized in y
+fSigmazInverse       = 0.0             ; The width of the gaussian which is initialized in z
+
+#
+# Phobos Parameters
+#
+[TPhobosMC]
+NucleusA             = Pb              ; A string specifying the nucleus A
+NucleusB             = Pb              ; A string specifying the nucleus B
+fXSect               = 62              ; NN inelastic XSection
+fUseRandomB          = False           ; nextEvent() selects a random fB_MC between [fBMin, fBMax]
+fB_MC                = 7.0             ; The impact parameter to use if fUseRandomB is false
+fBMin                = 7.000           ; The minimum impact parameter if fUseRandomB
+fBMax                = 7.001           ; The maximum impact parameter if fUseRandomB
+fNpartMin            = 8               ; The minimum number of participants for event to be run
+fEntropyModel        = TwoComponent    ; Selects how entropy is distributed. Allowed value is TwoComponent
+fSmearingSigma       = 0.7             ; Each particpant is smeared by gaussian fSmearingWidth = sqrt(<r^2> =<x^2>+<y^2>)
+fEntropyPerNW        = 32.5            ; Entropy per participant pair
+fAlphaBC             = 0.11            ; Entropy per binary collision fraction
+
+#
+# Input parameters for rnavierbjr
+#
+[TRNavier3DBj]
+fEOSName             = TEOSs95p        ; The underlying eos
+fModelName           = TBRSSS          ; The name of the underlying model.
+
+# Build up the hydro
+[THydro3DBj]
+fICName              = TICPhobosMC     ; Name of the initializer
+fStepperName         = TBRSSSStep      ; Name of the stepper
+
+
+#
+# Inpute parameters for freezout maker
+#
+[TTempFO]
+fThetaName           = temperature     ; Type of theta function used
+fT0                  = 0.7905          ; Radius of sphere
+fTSigma              = 0.0005          ; Surface thickness
+fThetaCut            = 1e-6            ; Cutoff for surface
+

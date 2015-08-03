@@ -1,0 +1,44 @@
+#if (exists("tag")) print sprintf("tag is defined as = %s", tag)
+tag = "icgb"
+set terminal wxt size 1000, 600 enhanced dashed
+#set term aqua enhanced font "Times-Roman,18" dashed
+aratio = 0.85
+fwidth  = 3.375*2
+fheight = fwidth*aratio
+#set terminal epslatex size fwidth, 2.0*fheight font "phv" 10 standalone
+#outputname = sprintf("test_%s.tex", tag)
+#set output outputname
+set style line 1 lt 1 lw 3 pt 6 ps 1 lc rgb "black"
+set style line 2 lt 2 lw 3 pt 1 ps 1 lc rgb "dark-red"
+set style line 3 lt 3 lw 3 pt 3 ps 2 lc rgb  "black" 
+set style line 4 lt 2 lw 3 pt 5 ps 2 lc rgb "orange"
+set style line 6 lt 7 lw 5 pt 3 ps 2 lc rgb  "medium-blue" 
+#set object 2 rect from screen 0,0 to screen 1,1 fs empty  back`
+
+set multiplot layout 1,2
+set view map
+unset key
+set palette defined ( 0 "#000090",\
+                      1 "#000fff",\
+                      2 "#0090ff",\
+                      3 "#0fffee",\
+                      4 "#90ff70",\
+                      5 "#ffee00",\
+                      6 "#ff7000",\
+                      7 "#ee0000",\
+                      8 "#7f0000")
+
+set ylabel "$-\\pi^{zz}\\tau^2$"
+set title "Shear-stress tensor"
+set xrange [0:5]
+plot \
+tag."_1dslice_x_0000_0000.out"   using 2:(-$20*$1**2):1 t "hydro"  w l ls 1 lc palette,\
+tag."2_1dslice_x_0000_0000.out"  using 2:(-$20*$1**2):1 t "icstep"  w l ls 3 lc palette
+
+set ylabel "$-\\pi^{zz}/p$"
+set title "Shear-stress tensor"
+plot \
+tag."_1dslice_x_0000_0000.out"   using 2:(-$20/$7):1 t "hydro"  w l ls 1 lc palette,\
+tag."2_1dslice_x_0000_0000.out"  using 2:(-$20/$7):1 t "icstep"  w l ls 3 lc palette
+
+unset multiplot

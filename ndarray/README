@@ -1,0 +1,29 @@
+This directory provides support for ndarray.
+It is identically to ndarray/include/ directory from the original project 
+https://github.com/ndarray/ndarray
+with single change at /ndarray/ArrayRef.h at line 113
+
+OLD
+    /// \brief = assignment of arrays and array expressions.
+    template <typename Other>
+    ArrayRef const &
+    operator =(ExpressionBase<Other> const & expr) const {
+        NDARRAY_ASSERT(expr.getShape() 
+                         == this->getShape().template first<ExpressionBase<Other>::ND::value>());
+113>        std::copy(expr.begin(),expr.end(),this->begin());
+        return *this;
+    }
+NEW
+    /// \brief = assignment of arrays and array expressions.
+    template <typename Other>
+    ArrayRef const &
+    operator =(ExpressionBase<Other> const & expr) const {
+        NDARRAY_ASSERT(expr.getShape() 
+                         == this->getShape().template first<ExpressionBase<Other>::ND::value>());
+        Iterator const i_end = this->end();
+        typename Other::Iterator j = expr.begin();
+        for (Iterator i = this->begin(); i != i_end; ++i, ++j) (*i) = (*j);
+        return *this;
+    }
+
+

@@ -1,0 +1,42 @@
+#
+# Called with 
+# 
+filename = "perturb_".xyz."_1dslice_".xyz."_0000_0000.out"
+print "processing filename = ".filename." for direction = ".idir
+set multiplot layout 2,3 title xyz
+
+set nokey
+
+
+#plot "perturb_1dslice_x_0000_0000.out" using 2:($1*$5) index 0:50:10 w l, \
+
+set title "first cycle"
+plot [][43.4:44.4] \
+filename using 2+idir:($25) index 0:7 w l, \
+filename using 2+idir:($5) index 0:7 w l, \
+
+set title "second cycle"
+plot  [][43.4:44.4]\
+filename using 2+idir:($25) index 16:23 w l, \
+filename using 2+idir:($5) index 16:23 w l, \
+
+set title "third cycle"
+plot  [][43.4:44.4]\
+filename using 2+idir:($25) index 32:39 w l, \
+filename using 2+idir:($5) index 32:39 w l, \
+
+set title "fourth cycle"
+plot  [][43.8:44.0]\
+filename using 2+idir:($25) index 48:55 w l, \
+filename using 2+idir:($5) index 48:55 w l, \
+
+set title "fifth cycle"
+plot  [][43.8:44.0]\
+filename using 2+idir:($25) index 64:71 w l, \
+filename using 2+idir:($5) index 64:71 w l, \
+
+set title "sixth cycle"
+plot  [][43.8:44.0]\
+filename using 2+idir:($25) index 80:87 w l, \
+filename using 2+idir:($5) index 80:87 w l, \
+unset multiplot

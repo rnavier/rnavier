@@ -1,0 +1,46 @@
+
+set multiplot layout 2,3
+set view map
+tag = "gaus_x"
+set key noautotitles
+set size square
+#plot the distributions after 
+set xlabel "x"
+set ylabel "y"
+set title "e-density for x-based evolution"
+splot [-10:10][-10:10] tag."_2dslice_xy_0000.out" using 2:3:5 index 10 w pm3d
+set title "e-density y-based evolution"
+tag = "gaus_y"
+splot [-10:10][-10:10] tag."_2dslice_xy_0000.out" using 2:3:5 index 10 w pm3d
+
+set size nosquare
+set title "e-density vs time"
+tag = "gaus_x"
+set xlabel "x or y"
+set ylabel "e-density"
+plot "gaus_x_1dslice_x_0000_0000.out" using 2:5 index 1::10 w l ti "x based", \
+"gaus_y_1dslice_y_0000_0000.out" using 3:5 index 1::10 w l ti "y based"
+
+set title "u vs time"
+tag = "gaus_x"
+set xlabel "x or y"
+set ylabel "u"
+plot "gaus_x_1dslice_x_0000_0000.out" using 2:12 index 1::10 w l ti "x based", \
+"gaus_y_1dslice_y_0000_0000.out" using 3:13 index 1::10 w l ti "y based"
+
+set title "entropy vs time"
+tag = "gaus_x"
+set xlabel "time"
+set ylabel "Entropy in xyslice"
+plot "gaus_x_entropy_vs_time_z0000.out" using 1:2 w l ti "x based", \
+"gaus_y_entropy_vs_time_z0000.out" using 1:2 w l ti "y based"
+
+
+set size nosquare
+set title "temp-density vs time"
+tag = "gaus_x"
+set xlabel "x or y"
+set ylabel "temperature"
+plot "gaus_x_1dslice_x_0000_0000.out" using 2:9 index 1::10 w l ti "x based", \
+"gaus_y_1dslice_y_0000_0000.out" using 3:9 index 1::10 w l ti "y based"
+unset multiplot

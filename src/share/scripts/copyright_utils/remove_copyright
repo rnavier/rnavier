@@ -1,0 +1,8 @@
+#Removes text matching 'copyright.txt' from the files in file_list.txt
+for i in $(<file_list.txt)
+do
+  if grep -q Copyright $i
+  then
+    grep -Fvxf copyright.txt $i >$i.new && mv $i.new $i
+  fi
+done

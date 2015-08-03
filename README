@@ -1,0 +1,60 @@
+rnavier is a 3+1 viscous hydrodynamics code.
+The source code and tests are in /scr/
+
+Acknowledgments:
+===============
+rnavier uses LSST implementation of multidimensional C++ arrays ndarray.
+Except for one modification (see README in /ndarrray), ndarray templates
+are the same as in the original which can be found at
+https://github.com/ndarray/ndarray
+rnvavier class TPhobosMC in /src/phobosic/ was derived from v1.1 version of
+TGlauberMC. The original code can be found at http://www.hepforge.org/downloads/tglaubermc
+Citation reference: http://arxiv.org/abs/0805.4411
+
+Building:
+=========
+
+0) First if you don't have it already install CMake (version 2.6 or greater).
+Code was tested with g++ 4.9.2, gnuplot 4.6 (for plotting), python 2.7.8 (for generating ini files)
+
+1) At the top level execute
+cmake -DCMAKE_BUILD_TYPE=Release ./
+
+2) Then compile
+make
+
+3) Export path to shared stuff
+export RNAVIERDATA=path/to/scr/share
+or
+export RNAVIERDATA=../share
+
+4) Go to test folders and run shell scripts.
+test_core/
+    test_gaus.sh -- 1D gaussian expansion in x and y directions
+    test_icbj.sh -- tests and compares single cell Bjorken expansion with rudementary hydro code
+sodic/
+    test_sod_1d.sh -- 1D ideal sod problem
+    test_sod_2d.sh -- 2D sod problems in all three planes
+    test_sod_compare.py -- allows to compare rotated 2D sod problem wiht 1D
+bjperturb/
+    test_perturb.sh -- tests 'standing wave' perturbations
+gubseric/
+    test_icgb.sh -- viscous gubser flow test (compares with Navier Stokes limit)
+    test_gubserfo.sh -- tests entropy flow through freezout surface in ideal gubser flow
+test_code2d/
+    test_code2d.sh -- compares full 2D evolution of bumpy initial conditions and compares with results from old code
+    test_code3d.sh -- runs bumpy initial conditions with smooth perturbations inn rapidity direction (currently works with Euler_IMEX)
+
+5) remaining folders contain
+hydro/ -- main hydro code
+phobosic/ -- Phobos glauber MC code with simple rapidity extension
+eoss95p/ -- lattice equation of state
+
+6) Output files are produced by THYAnalise class.
+# Order of data in printouts
+t:1  e:5     u0:11  pi11:15 
+x:2  n:6     u1:12  pi12:16 
+y:3  p:7     u2:13  pi13:17 
+z:4  s:8     u3:14  pi22:18 
+     temper:9       pi23:19 
+     mu:10          pi33:20 

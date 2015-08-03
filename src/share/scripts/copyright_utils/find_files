@@ -1,0 +1,2 @@
+#Finds source files
+find ../../../ -name *.h -o -name *.cxx | sort | grep -v test > file_list.txt 

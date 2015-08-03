@@ -1,0 +1,85 @@
+# compare with
+#http://flash.uchicago.edu/~jbgallag/2012/flash4_ug/node34.html#SECTION08119000000000000000 
+set terminal wxt enhanced size 800, 1200 dashed
+aratio = 0.85
+fwidth  = 3.375*2
+fheight = fwidth*aratio
+#set terminal epslatex size fwidth, 1.5*fheight font "phv" 10 standalone
+#set output "test_sod_1d.tex"
+set style line 1 lt 1 lw 8 pt 6 ps 1 lc rgb "red"
+set style line 2 lt 1 lw 3 pt 1 ps 1 lc rgb "dark-red"
+set style line 3 lt 1 lw 3 pt 3 ps 2 lc rgb  "dark-spring-green" 
+set style line 4 lt 3 lw 5 pt 4 ps 2 lc rgb "dark-spring-green"
+set style line 5 lt 5 lw 5 pt 5 ps 2 lc rgb "dark-spring-green"
+set style line 6 lt 7 lw 5 pt 3 ps 2 lc rgb  "medium-blue" 
+#set object 2 rect from screen 0,0 to screen 1,1 fs empty  back`
+
+set multiplot layout 3,2
+set view map
+tag = "sod1d"
+unset key
+set palette defined ( 0 "#000090",\
+                      1 "#000fff",\
+                      2 "#0090ff",\
+                      3 "#0fffee",\
+                      4 "#90ff70",\
+                      5 "#ffee00",\
+                      6 "#ff7000",\
+                      7 "#ee0000",\
+                      8 "#7f0000")
+set size square
+#plot the distributions after 
+set xlabel "x"
+set ylabel "y"
+set title "Initial energy density"
+splot [-1:1][-1:1] tag."_2dslice_xy_0000.out" using 2:3:5 index 0 w pm3d
+set title "Final energy density"
+splot [-1:1][-1:1] tag."_2dslice_xy_0000.out" using 2:3:5 index 1 w pm3d
+
+set key
+set title "Energy"
+set ylabel "e"
+plot [-1:1] tag."_1dslice_x_0000_0000.out" using 2:5 index 0 t "initial" w l ls 2,\
+tag."_1dslice_x_0000_0000.out" using 2:5 index 1 t "final" w l ls 3
+
+set title "Density"
+set ylabel "n"
+plot [-1:1] tag."_1dslice_x_0000_0000.out" using 2:6 index 0 t "initial" w l ls 2,\
+tag."_1dslice_x_0000_0000.out" using 2:6 index 1 t "final" w l ls 3
+
+set title "Pressure"
+set yrange [-0.05:14]
+set mytics
+set ylabel "p"
+plot [-1:1] tag."_1dslice_x_0000_0000.out" using 2:7 index 0 t "initial" w l ls 2,\
+tag."_1dslice_x_0000_0000.out" using 2:7 index 1 t "final" w l ls 3
+
+set title "Velocity in x"
+set yrange [-0.8:0.8]
+set ytics 0.2
+set mytics 0.05
+set ylabel "vx"
+plot [-1:1] tag."_1dslice_x_0000_0000.out" using 2:($12/$11) index 0 t "initial" w l ls 2,\
+tag."_1dslice_x_0000_0000.out" using 2:($12/$11) index 1 t "final" w l ls 3
+
+unset multiplot
+#
+#set xrange [-15:15]
+#set xtics 10
+#set size nosquare
+#set xlabel "x"
+#set ylabel "e"
+#plot tag."_1dslice_x_0000_0000.out" using 2:5 index 0 w l,\
+#tag."_1dslice_x_0000_0000.out" using 2:5 index 1 w l
+#
+#set xlabel "x"
+#set ylabel "p"
+#plot tag."_1dslice_x_0000_0000.out" using 2:6 i 0 w l,\
+#tag."_1dslice_x_0000_0000.out" using 2:6 i 1 w l
+#
+#set xlabel "x"
+#set ylabel "ux"
+#plot tag."_1dslice_x_0000_0000.out" using 2:12 i 0 w l,\
+#tag."_1dslice_x_0000_0000.out" using 2:12 i 1 w l
+#
+#unset multiplot
